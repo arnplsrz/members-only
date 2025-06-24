@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %> | Members Only
+  </title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  <nav>
+    <%- include('partials/nav') %>
+  </nav>
+  <main>
+    <h1>Members Only</h1>
+    <%- include(content) %>
+  </main>
+  <footer>
+    <%- include('partials/footer') %>
+  </footer>
+</body>
+
+</html>
