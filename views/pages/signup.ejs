@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+</head>
+
+<body>
+  <h1><%= title %></h1>
+  <%- include("../partials/errors") %>
+  <form action="/sign-up" method="POST">
+    <label for="firstName">First Name</label>
+    <input id="firstName" name="firstName" placeholder="First Name" type="text" />
+    <label for="lastName">Last Name</label>
+    <input id="lastName" name="lastName" placeholder="Last Name" type="text" />
+    <label for="username">Username</label>
+    <input id="username" name="username" placeholder="Username" type="text" />
+    <label for="password">Password</label>
+    <input id="password" name="password" type="Password" />
+    <button type="submit">Sign Up</button>
+  </form>
+</body>
+
+</html>
