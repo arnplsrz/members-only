@@ -28,7 +28,20 @@ const postNewMessage = async (req, res, next) => {
   }
 }
 
+const postDeleteMessage = async (req, res, next) => {
+  const postId = req.params.id
+
+  try {
+    await pool.query('DELETE FROM posts WHERE id = $1', [postId])
+    res.redirect('/')
+  } catch (error) {
+    console.error(error)
+    next(error)
+  }
+}
+
 module.exports = {
   getNewMessage,
   postNewMessage,
+  postDeleteMessage,
 }

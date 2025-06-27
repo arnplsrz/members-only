@@ -2,23 +2,22 @@ const express = require('express')
 const router = express.Router()
 const indexController = require('../controllers/indexController')
 const messageController = require('../controllers/messageController')
+const membershipController = require('../controllers/membershipController')
+const authController = require('../controllers/authController')
 
 router.get('/', indexController.getHomepage)
 
-router.post('/posts/:id/delete', indexController.postDeleteMessage)
-
-router.get('/sign-up', indexController.getSignup)
-router.post('/sign-up', indexController.postSignup)
-
-router.get('/sign-in', indexController.getSignin)
-router.post('/sign-in', indexController.postSignin)
-
-router.get('/log-out', indexController.getLogout)
-
-router.get('/membership', indexController.getMembership)
-router.post('/membership', indexController.postMembership)
-
 router.get('/new-message', messageController.getNewMessage)
 router.post('/new-message', messageController.postNewMessage)
+router.post('/posts/:id/delete', messageController.postDeleteMessage)
+
+router.get('/membership', membershipController.getMembership)
+router.post('/membership', membershipController.postMembership)
+
+router.get('/sign-up', authController.getSignup)
+router.post('/sign-up', authController.postSignup)
+router.get('/sign-in', authController.getSignin)
+router.post('/sign-in', authController.postSignin)
+router.get('/log-out', authController.getLogout)
 
 module.exports = router
