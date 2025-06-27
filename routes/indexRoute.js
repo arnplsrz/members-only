@@ -5,6 +5,8 @@ const messageController = require('../controllers/messageController')
 
 router.get('/', indexController.getHomepage)
 
+router.post('/posts/:id/delete', indexController.postDeleteMessage)
+
 router.get('/sign-up', indexController.getSignup)
 router.post('/sign-up', indexController.postSignup)
 

@@ -21,6 +21,11 @@
       Anonymous
       <% } %>
     </p>
+    <%  if (locals.user && locals.user.is_admin) { %>
+    <form action="/posts/<%= post.id %>/delete" method="POST">
+      <button type="submit">Delete</button>
+    </form>
+    <% } %>
   </li>
   <% }) %>
 </ul>

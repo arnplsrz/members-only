@@ -29,7 +29,8 @@ async function getPosts() {
         users.id AS user_id,
         users.first_name,
         users.last_name,
-        users.username
+        users.username,
+        users.is_admin
       FROM posts
       JOIN users ON posts.user_id = users.id
       ORDER BY posts.timestamp DESC
@@ -45,6 +46,7 @@ async function getPosts() {
         first_name: row.first_name,
         last_name: row.last_name,
         username: row.username,
+        is_admin: row.is_admin,
       },
     }))
 
@@ -63,6 +65,18 @@ const getHomepage = async (req, res) => {
     posts: posts,
     user: req.user,
   })
+}
+
+const postDeleteMessage = async (req, res, next) => {
+  const postId = req.params.id
+
+  try {
+    await pool.query('DELETE FROM posts WHERE id = $1', [postId])
+    res.redirect('/')
+  } catch (error) {
+    console.error(error)
+    next(error)
+  }
 }
 
 const getSignup = (req, res) => {
@@ -187,25 +201,30 @@ const getMembership = (req, res) => {
 const postMembership = async (req, res, next) => {
   const passcode = req.body.passcode
 
-  if (passcode !== process.env.MEMBERSHIP_PASSCODE) {
-    return res.status(403).render('index', {
-      title: 'Membership',
-      content: 'pages/membership',
-      errors: [{ msg: 'Invalid passcode' }],
-    })
+  if (passcode === process.env.MEMBERSHIP_PASSCODE) {
+    try {
+      await pool.query('UPDATE users SET membership_status = true WHERE username = $1', [req.user.username])
+      res.redirect('/')
+    } catch (error) {
+      console.error(error)
+      return next(error)
+    }
   }
 
-  try {
-    await pool.query('UPDATE users SET membership_status = true WHERE username = $1', [req.user.username])
-    res.redirect('/')
-  } catch (error) {
-    console.error(error)
-    return next(error)
+  if (passcode === process.env.ADMIN_PASSCODE) {
+    try {
+      await pool.query('UPDATE users SET is_admin = true WHERE username = $1', [req.user.username])
+      res.redirect('/')
+    } catch (error) {
+      console.error(error)
+      return next(error)
+    }
   }
 }
 
 module.exports = {
   getHomepage,
+  postDeleteMessage,
   getSignup,
   postSignup,
   getSignin,
