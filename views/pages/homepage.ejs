@@ -6,3 +6,24 @@
 <a href="/sign-up">SIGN UP</a>
 <a href="/sign-in">SIGN IN</a>
 <% } %>
+<% if (posts.length > 0) { %>
+<h2>Recent Posts</h2>
+<ul>
+  <% posts.forEach(post => { %>
+  <li>
+    <h3><%= post.title %></h3>
+    <p><%= post.content %></p>
+    <p>
+      Posted by:
+      <% if (locals.user) { %>
+      <%= post.user.username %> at <%= post.timestamp.toLocaleString() %>
+      <% } else { %>
+      Anonymous
+      <% } %>
+    </p>
+  </li>
+  <% }) %>
+</ul>
+<% } else { %>
+<p>No posts available.</p>
+<% } %>
