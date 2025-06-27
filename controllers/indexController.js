@@ -198,6 +198,16 @@ const getMembership = (req, res) => {
   })
 }
 
+const getLogout = (req, res) => {
+  req.logout(err => {
+    if (err) {
+      console.error(err)
+      return next(err)
+    }
+    res.redirect('/')
+  })
+}
+
 const postMembership = async (req, res, next) => {
   const passcode = req.body.passcode
 
@@ -229,6 +239,7 @@ module.exports = {
   postSignup,
   getSignin,
   postSignin,
+  getLogout,
   getMembership,
   postMembership,
 }
