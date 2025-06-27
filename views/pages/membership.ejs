@@ -1,0 +1,8 @@
+<p>Join the club</p>
+<p>Enter the secret passcode</p>
+<%- include("../partials/errors") %>
+<form action="/membership" method="POST">
+  <label for="passcode">Passcode</label>
+  <input type="text" id="passcode" name="passcode" placeholder="Enter passcode" />
+  <button type="submit">Join</button>
+</form>
