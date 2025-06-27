@@ -1,6 +1,7 @@
-const pool = require('../database/pool')
 const bcrypt = require('bcryptjs')
+const passport = require('passport')
 const { body, validationResult } = require('express-validator')
+const pool = require('../database/pool')
 
 const validationRules = [
   body('firstName').trim().escape().isLength({ min: 1, max: 50 }).withMessage('First name must be at least 1 character long and at most 50 characters long'),
@@ -21,6 +22,7 @@ const getHomepage = (req, res) => {
   res.render('index', {
     title: 'Home',
     content: 'pages/homepage',
+    user: req.user,
   })
 }
 
@@ -76,7 +78,7 @@ const postSignup = [
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10)
       await pool.query('insert into users (first_name, last_name, username, password) values ($1, $2, $3, $4)', [req.body.firstName, req.body.lastName, req.body.username, hashedPassword])
-      res.redirect('/membership')
+      res.redirect('/')
     } catch (error) {
       console.error(error)
       next(error)
@@ -84,17 +86,69 @@ const postSignup = [
   },
 ]
 
+const getSignin = (req, res) => {
+  res.render('index', {
+    title: 'Sign In',
+    content: 'pages/signin',
+    formData: {
+      username: '',
+      password: '',
+    },
+  })
+}
+
+const postSignin = async (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      console.error(err)
+      return next(err)
+    }
+    if (!user) {
+      return res.status(401).render('index', {
+        title: 'Sign In',
+        content: 'pages/signin',
+        errors: [{ msg: info.message }],
+        formData: {
+          username: req.body.username,
+          password: req.body.password,
+        },
+      })
+    }
+
+    req.logIn(user, err => {
+      if (err) {
+        console.error(err)
+        return next(err)
+      }
+      res.redirect('/')
+    })
+  })(req, res, next)
+}
+
 const getMembership = (req, res) => {
+  if (!req.user) {
+    return res.status(403).render('index', {
+      title: 'Sign in',
+      content: 'pages/signin',
+      formData: {
+        username: '',
+        password: '',
+      },
+      errors: [{ msg: 'You must be signed in to access that page' }],
+    })
+  }
+
   res.render('index', {
     title: 'Membership',
     content: 'pages/membership',
+    user: req.user,
   })
 }
 
 const postMembership = async (req, res, next) => {
   const passcode = req.body.passcode
 
-  if (passcode !== 'asd') {
+  if (passcode !== process.env.MEMBERSHIP_PASSCODE) {
     return res.status(403).render('index', {
       title: 'Membership',
       content: 'pages/membership',
@@ -103,7 +157,7 @@ const postMembership = async (req, res, next) => {
   }
 
   try {
-    await pool.query('UPDATE users SET membership_status = true WHERE username = $1', [req.session.username])
+    await pool.query('UPDATE users SET membership_status = true WHERE username = $1', [req.user.username])
     res.redirect('/')
   } catch (error) {
     console.error(error)
@@ -115,6 +169,8 @@ module.exports = {
   getHomepage,
   getSignup,
   postSignup,
+  getSignin,
+  postSignin,
   getMembership,
   postMembership,
 }

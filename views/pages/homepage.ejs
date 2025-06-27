@@ -1,1 +1,8 @@
-<p>Homepage heree</p>
+<% if (locals.user) {%>
+<h1>WELCOME BACK <%= user.username %></h1>
+<a href="/log-out">LOG OUT</a>
+<% } else { %>
+<h1>WELCOME TO OUR WEBSITE</h1>
+<a href="/sign-up">SIGN UP</a>
+<a href="/sign-in">SIGN IN</a>
+<% } %>
