@@ -1,0 +1,36 @@
+<% 
+let displayTime = '';
+if (post && post.timestamp) {
+  const now = new Date();
+  const postDate = new Date(post.timestamp);
+  const diffMs = now - postDate;
+  const diffSec = Math.floor(diffMs / 1000);
+  const diffMin = Math.floor(diffSec / 60);
+  const diffHr = Math.floor(diffMin / 60);
+
+  if (diffHr < 24) {
+    if (diffHr >= 1) {
+      displayTime = `${diffHr}h`;
+    } else if (diffMin >= 1) {
+      displayTime = `${diffMin}m`;
+    } else {
+      displayTime = 'just now';
+    }
+  } else {
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    const month = months[postDate.getMonth()];
+    const day = postDate.getDate();
+    const year = postDate.getFullYear();
+    const hours = postDate.getHours().toString().padStart(2, '0');
+    const minutes = postDate.getMinutes().toString().padStart(2, '0');
+    const showYear = year !== now.getFullYear();
+    displayTime = `${month}, ${day}${showYear ? ' ' + year : ''} at ${hours}:${minutes}`;
+  }
+} else {
+  displayTime = 'unknown time';
+}
+%>
+<span><%= displayTime %></span>

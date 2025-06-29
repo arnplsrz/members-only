@@ -1,59 +1,47 @@
-<section class="hero is-large is-info">
-  <div class="hero-body">
-    <p class="title">Large hero</p>
-    <p class="subtitle">Large subtitle</p>
-  </div>
-</section>
-
 <section class="section">
-  <div class="container">
-
-    <% if (posts.length > 0) { %>
-    <h2 class="title is-4">Recent Posts</h2>
-    <div class="grid">
-      <% posts.slice(0, 6).forEach(post => { %>
-      <div class="card cell is-flex is-flex-direction-column">
-        <div class="card-content is-flex-grow-1">
-          <div class="media">
-            <div class="media-content">
-              <% if (locals.user) { %>
-              <p class="title is-4"><%= post.user.first_name %> <%= post.user.last_name %></p>
-              <p class="subtitle is-6">@<%= post.user.username %></p>
-              <% } else { %>
-              <p class="title is-4">Anonymous</p>
-              <p class="subtitle is-6">@someone</p>
-              <% } %>
-            </div>
-          </div>
-          <div class="content">
-            <%= post.content.length > 130 ? post.content.substring(0, 130) + '...' : post.content %>
-            <br>
-            <time datetime="2016-1-1"><%= post.timestamp.toLocaleString() %></time>
+  <% if (posts.length > 0) { %>
+  <h2 class="title is-4">Recent Posts</h2>
+  <div class="grid posts">
+    <% posts.forEach(post => { %>
+    <div class="card cell">
+      <div class="card-content">
+        <div class="media mb-3">
+          <div class="media-content">
+            <% if (locals.user) { %>
+            <p class="title is-4 p-1"><%= post.user.first_name %> <%= post.user.last_name %></p>
+            <p class="subtitle is-6">@<%= post.user.username %> • <time datetime="<%= post.timestamp.toISOString() %>"> <%- include('../partials/post-time', { post: post }) %>
+              </time></p>
+            <% } else { %>
+            <p class="title is-4 p-1">Anonymous</p>
+            <p class="subtitle is-6">@someone • <time datetime="<%= post.timestamp.toISOString() %>"> <%- include('../partials/post-time', { post: post }) %>
+              </time>
+            </p>
+            <% } %>
           </div>
         </div>
-        <% if (locals.user && locals.user.is_admin) { %>
-        <footer class="card-footer">
-          <form action="/posts/<%= post.id %>/delete" method="POST" class="card-footer-item">
-            <button class="button is-small is-danger" type="submit">Delete</button>
-          </form>
-        </footer>
-        <% } %>
+        <div class="content">
+          <%= post.content.length > 350 ? post.content.substring(0, 350) + '...' : post.content %>
+        </div>
       </div>
-      <% }) %>
+      <% if (locals.user && locals.user.is_admin) { %>
+      <footer class="card-footer">
+        <form action="/posts/<%= post.id %>/delete" method="POST" class="card-footer-item">
+          <button class="button is-small is-danger" type="submit">Delete</button>
+        </form>
+      </footer>
+      <% } %>
     </div>
-    <% } else { %>
-    <p>No posts available.</p>
-    <% } %>
-
+    <% }) %>
   </div>
+  <% } else { %>
+  <p>No posts available.</p>
+  <% } %>
 </section>
 
 <section class="section">
-  <div class="container">
-    <h1 class="title">Section</h1>
-    <h2 class="subtitle">
-      A simple container to divide your page into <strong>sections</strong>, like
-      the one you're currently reading.
-    </h2>
-  </div>
+  <h1 class="title">Section</h1>
+  <h2 class="subtitle">
+    A simple container to divide your page into <strong>sections</strong>, like
+    the one you're currently reading.
+  </h2>
 </section>
