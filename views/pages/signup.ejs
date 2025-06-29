@@ -1,6 +1,9 @@
-  <section class="section">
-    <div class="container">
-      <h1 class="title"><%= title %></h1>
+  <div class="grid sign-form">
+    <section class="cell section banner">
+    </section>
+    <section class="cell section is-flex is-flex-direction-column is-justify-content-center">
+      <h2 class="title is-2"><%= title %></h2>
+      <p class="subtitle">Sign up to your account</p>
       <%- include("../partials/errors") %>
       <form action="/sign-up" method="POST">
         <div class="field">
@@ -33,14 +36,12 @@
             <input class="input" type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" value="<%= formData.confirmPassword %>" />
           </div>
         </div>
-        <div class="field">
+        <div class="field mt-5">
           <div class="control">
-            <button class="button is-primary" type="submit">Sign Up</button>
+            <button class="button is-primary is-fullwidth" type="submit">Sign Up</button>
           </div>
         </div>
-        <p>Already have an account? <a href="/sign-in">Sign In</a></p>
-        <p>Forgot your password? <a href="/forgot-password">Reset Password</a></p>
-        <p>Need help? <a href="/help">Help</a></p>
+        <p class="has-text-centered">Already have an account? <a href="/sign-in">Sign In</a></p>
       </form>
-    </div>
-  </section>
+    </section>
+  </div>
