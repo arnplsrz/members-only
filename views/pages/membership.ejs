@@ -1,11 +1,22 @@
-<%- include("../partials/errors") %>
-<% if (locals.user) { %>
-<h1>Welcome back, <%= user.username %></h1>
-<% } %>
-<p>Join the club</p>
-<p>Enter the secret passcode</p>
-<form action="/membership" method="POST">
-  <label for="passcode">Passcode</label>
-  <input type="text" id="passcode" name="passcode" placeholder="Enter passcode" />
-  <button type="submit">Join</button>
-</form>
+<section class="section">
+  <div class="container">
+    <%- include("../partials/errors") %>
+    <% if (locals.user) { %>
+    <h1 class="title">Welcome back, <%= user.username %></h1>
+    <% } %>
+    <p class="subtitle">Join the club</p>
+    <form action="/membership" method="POST">
+      <div class="field">
+        <label class="label" for="passcode">Passcode</label>
+        <div class="control">
+          <input class="input" type="text" id="passcode" name="passcode" placeholder="Enter secret passcode" />
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <button class="button is-primary" type="submit">Join</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

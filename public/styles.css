@@ -1,3 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --bulma-body-family: 'Chivo', sans-serif;
+}
+
 html {
   color-scheme: light dark;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+}
+
+main {
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-color: light-dark(#eaeaea, #333);
+}
+
+.grid {
+  --bulma-grid-column-min: 30rem;
+}
+
+.grid div.card {
+  margin-bottom: 0;
 }

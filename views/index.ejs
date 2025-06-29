@@ -8,20 +8,18 @@
     <%= title %> | Members Only
   </title>
   <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="/styles.css">
 </head>
 
-<body>
-  <nav>
-    <%- include('partials/nav') %>
-  </nav>
-  <main>
-    <h1>Members Only</h1>
+<body class="is-flex is-flex-direction-column">
+  <%- include('partials/nav') %>
+  <main class="is-flex-grow-1">
     <%- include(content) %>
   </main>
-  <footer>
-    <%- include('partials/footer') %>
-  </footer>
+  <%- include('partials/footer') %>
+  <script src="/js/navbar.js"></script>
 </body>
 
 </html>

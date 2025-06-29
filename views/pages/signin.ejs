@@ -1,10 +1,24 @@
-<h2><%= title %></h2>
-<p>Sign in to your account</p>
-<%- include("../partials/errors") %>
-<form action="/sign-in" method="POST">
-  <label for="username">Username</label>
-  <input type="text" id="username" name="username" placeholder="Enter your username" value="<%= formData.username %>" />
-  <label for="password">Password</label>
-  <input type="password" id="password" name="password" placeholder="Enter your password" value="<%= formData.password %>" />
-  <button type="submit">Sign In</button>
-</form>
+<section class="section">
+  <h2 class="title is-2"><%= title %></h2>
+  <p class="subtitle">Sign in to your account</p>
+  <%- include("../partials/errors") %>
+  <form action="/sign-in" method="POST">
+    <div class="field">
+      <label class="label" for="username">Username</label>
+      <div class="control">
+        <input class="input" type="text" id="username" name="username" placeholder="Enter your username" value="<%= formData.username %>" />
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="password">Password</label>
+      <div class="control">
+        <input class="input" type="password" id="password" name="password" placeholder="Enter your password" value="<%= formData.password %>" />
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <button class="button is-primary" type="submit">Sign In</button>
+      </div>
+    </div>
+  </form>
+</section>

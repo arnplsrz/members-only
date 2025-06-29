@@ -1,7 +1,25 @@
-<form action="/new-message" method="POST">
-  <label for="title">Title</label>
-  <input type="text" id="title" name="title" placeholder="Enter message title" required />
-  <label for="content">Message</label>
-  <textarea id="content" name="content" placeholder="Enter your message" required></textarea>
-  <button type="submit">Send Message</button>
-</form>
+<section class="section">
+  <div class="container">
+    <h1 class="title">New Message</h1>
+    <p class="subtitle">Send a message to the anyone!</p>
+    <form action="/new-message" method="POST">
+      <div class="field">
+        <label class="label" for="title">Title</label>
+        <div class="control">
+          <input class="input" type="text" id="title" name="title" placeholder="Enter message title" required />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="content">Message</label>
+        <div class="control">
+          <textarea class="textarea" id="content" name="content" placeholder="Enter your message" required></textarea>
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <button class="button is-primary" type="submit">Send Message</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
