@@ -1,55 +1,54 @@
-<nav class="navbar m-3" role="navigation" aria-label="main navigation">
-  <div class="container">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="/">
-        <strong>arnplsrz's Members Only</strong>
-      </a>
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
+<nav class="navbar p-3" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <strong>arnplsrz's Members Only</strong>
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
 
-    <div id="navbarMenu" class="navbar-menu">
-      <div class="navbar-start">
-        <% if (locals.user) { %>
-        <a class="navbar-item" href="/new-message">
-          <span class="icon">
-            <i class="fas fa-envelope"></i>
+  <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-start">
+      <% if (locals.user) { %>
+      <a class="navbar-item" href="/new-message">
+        <span class="icon">
+          <i class="fas fa-envelope"></i>
+        </span>
+        <span>New Message</span>
+      </a>
+      <a class="navbar-item" href="/membership">
+        <span class="icon">
+          <i class="fas fa-user-plus"></i>
+        </span>
+        <span>Membership</span>
+      </a>
+      <% } %>
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <% if (locals.user) { %>
+          <span class="navbar-item">
+            <strong>Welcome, <%= user.username %></strong>
           </span>
-          <span>New Message</span>
-        </a>
-        <a class="navbar-item" href="/membership">
-          <span class="icon">
-            <i class="fas fa-user-plus"></i>
-          </span>
-          <span>Membership</span>
-        </a>
-        <% } %>
-      </div>
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <% if (locals.user) { %>
-            <span class="navbar-item">
-              <strong>Welcome, <%= user.username %></strong>
+          <a class="button is-danger is-light" href="/log-out">
+            <span class="icon">
+              <i class="fas fa-sign-out-alt"></i>
             </span>
-            <a class="button is-danger is-light" href="/log-out">
-              <span class="icon">
-                <i class="fas fa-sign-out-alt"></i>
-              </span>
-              <strong>Log out</strong>
-            </a>
-            <% } else { %>
-            <a class="button is-primary" href="/sign-up">
-              <strong>Sign up</strong>
-            </a>
-            <a class="button is-light" href="/sign-in">
-              <strong>Sign in</strong>
-            </a>
-            <% } %>
-          </div>
+            <strong>Log out</strong>
+          </a>
+          <% } else { %>
+          <a class="button is-primary" href="/sign-up">
+            <strong>Sign up</strong>
+          </a>
+          <a class="button is-light" href="/sign-in">
+            <strong>Sign in</strong>
+          </a>
+          <% } %>
         </div>
       </div>
     </div>

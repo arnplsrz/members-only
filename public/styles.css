@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
+  /* --bulma-navbar-height: auto; */
   --bulma-body-family: 'Chivo', sans-serif;
 }
 
@@ -24,10 +25,49 @@ main {
   border-color: light-dark(#eaeaea, #333);
 }
 
-.grid {
+.navbar {
+  --bulma-navbar-background-color: var(--bulma-scheme-main-bis);
+  box-sizing: content-box;
+}
+
+.navbar-burger {
+  color: light-dark(#333, #eaeaea);
+}
+
+.grid.posts {
   --bulma-grid-column-min: 30rem;
 }
 
-.grid div.card {
+.grid.posts .card {
+  --bulma-card-shadow: 0;
+
   margin-bottom: 0;
+  border: 1px solid light-dark(#eaeaea, #333);
+}
+
+.grid.sign-form {
+  height: 100%;
+}
+
+@media screen and (max-width: 1023px) {
+  .navbar-menu {
+    border: 1px solid transparent;
+    border-color: light-dark(#eaeaea, #333);
+    border-radius: 0.5rem;
+  }
+
+  .grid.sign-form .banner {
+    display: none;
+  }
+
+  .grid.sign-form section:has(form) {
+    justify-content: start !important;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .grid.posts,
+  .grid.sign-form {
+    --bulma-grid-column-min: auto;
+  }
 }
