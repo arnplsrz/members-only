@@ -2,9 +2,17 @@
   <div class="container">
     <%- include("../partials/errors") %>
     <% if (locals.user) { %>
-    <h1 class="title">Welcome back, <%= user.username %></h1>
+    <h1 class="title">Join the club.</h1>
     <% } %>
-    <p class="subtitle">Join the club</p>
+    <p class="subtitle">
+      You are currently
+      <% if (locals.user.is_admin) { %>
+      an Admin
+      <% } else if (locals.user.membership_status) { %>
+      a Member
+      <% } else { %>
+      a Guest
+      <% } %>
     <form action="/membership" method="POST">
       <div class="field">
         <label class="label" for="passcode">Passcode</label>
