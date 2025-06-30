@@ -1,5 +1,5 @@
-<section class="section">
-  <div class="container">
+<section class="section membership is-maxheight">
+  <div class="container pb-6 is-maxheight is-flex is-flex-direction-column is-justify-content-center">
     <%- include("../partials/errors") %>
     <% if (locals.user) { %>
     <h1 class="title">Join the club.</h1>
@@ -20,7 +20,7 @@
           <input class="input" type="text" id="passcode" name="passcode" placeholder="Enter secret passcode" />
         </div>
       </div>
-      <div class="field">
+      <div class="field mt-5">
         <div class="control">
           <button class="button is-primary" type="submit">Join</button>
         </div>

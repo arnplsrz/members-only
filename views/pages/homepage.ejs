@@ -3,8 +3,8 @@
   <h2 class="title is-4">Recent Posts</h2>
   <div class="grid posts">
     <% posts.forEach(post => { %>
-    <div class="card cell">
-      <div class="card-content">
+    <div class="card cell is-flex is-flex-direction-column">
+      <div class="card-content is-flex-grow-1">
         <div class="media mb-3">
           <div class="media-content">
             <% if (locals.user) { %>
@@ -25,7 +25,7 @@
       </div>
       <% if (locals.user && locals.user.is_admin) { %>
       <footer class="card-footer">
-        <form action="/posts/<%= post.id %>/delete" method="POST" class="card-footer-item">
+        <form action="/posts/<%= post.id %>/delete" method="POST" class="card-footer-item p-5 is-justify-content-start">
           <button class="button is-small is-danger" type="submit">Delete</button>
         </form>
       </footer>

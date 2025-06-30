@@ -1,47 +1,49 @@
-  <div class="grid sign-form">
+  <div class="grid is-maxheight sign-form">
     <section class="cell section banner">
     </section>
-    <section class="cell section is-flex is-flex-direction-column is-justify-content-center">
-      <h2 class="title is-2"><%= title %></h2>
-      <p class="subtitle">Sign up to your account</p>
-      <%- include("../partials/errors") %>
-      <form action="/sign-up" method="POST">
-        <div class="field">
-          <label class="label" for="firstName">First Name</label>
-          <div class="control">
-            <input class="input" id="firstName" name="firstName" placeholder="First Name" type="text" value="<%= formData.firstName %>" />
+    <section class="cell section">
+      <div class="container is-flex is-flex-direction-column is-justify-content-center">
+        <h2 class="title is-2 has-text-centered"><%= title %></h2>
+        <p class="subtitle has-text-centered">Sign up to your account</p>
+        <%- include("../partials/errors") %>
+        <form action="/sign-up" method="POST">
+          <div class="field">
+            <label class="label" for="firstName">First Name</label>
+            <div class="control">
+              <input class="input" id="firstName" name="firstName" placeholder="First Name" type="text" value="<%= formData.firstName %>" />
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <label class="label" for="lastName">Last Name</label>
-          <div class="control">
-            <input class="input" id="lastName" name="lastName" placeholder="Last Name" type="text" value="<%= formData.lastName %>" />
+          <div class="field">
+            <label class="label" for="lastName">Last Name</label>
+            <div class="control">
+              <input class="input" id="lastName" name="lastName" placeholder="Last Name" type="text" value="<%= formData.lastName %>" />
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <label class="label" for="username">Username</label>
-          <div class="control">
-            <input class="input" id="username" name="username" placeholder="Username" type="text" value="<%= formData.username %>" />
+          <div class="field">
+            <label class="label" for="username">Username</label>
+            <div class="control">
+              <input class="input" id="username" name="username" placeholder="Username" type="text" value="<%= formData.username %>" />
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <label class="label" for="password">Password</label>
-          <div class="control">
-            <input class="input" id="password" name="password" placeholder="Password" type="password" value="<%= formData.password %>" />
+          <div class="field">
+            <label class="label" for="password">Password</label>
+            <div class="control">
+              <input class="input" id="password" name="password" placeholder="Password" type="password" value="<%= formData.password %>" />
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <label class="label" for="confirmPassword">Confirm Password</label>
-          <div class="control">
-            <input class="input" type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" value="<%= formData.confirmPassword %>" />
+          <div class="field">
+            <label class="label" for="confirmPassword">Confirm Password</label>
+            <div class="control">
+              <input class="input" type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" value="<%= formData.confirmPassword %>" />
+            </div>
           </div>
-        </div>
-        <div class="field mt-5">
-          <div class="control">
-            <button class="button is-primary is-fullwidth" type="submit">Sign Up</button>
+          <div class="field mt-5">
+            <div class="control">
+              <button class="button is-primary is-fullwidth" type="submit">Sign Up</button>
+            </div>
           </div>
-        </div>
-        <p class="has-text-centered">Already have an account? <a href="/sign-in">Sign In</a></p>
-      </form>
+          <p class="has-text-centered">Already have an account? <a href="/sign-in">Sign In</a></p>
+        </form>
+      </div>
     </section>
   </div>
