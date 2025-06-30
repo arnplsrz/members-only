@@ -27,7 +27,7 @@ if (post && post.timestamp) {
     const hours = postDate.getHours().toString().padStart(2, '0');
     const minutes = postDate.getMinutes().toString().padStart(2, '0');
     const showYear = year !== now.getFullYear();
-    displayTime = `${month}, ${day}${showYear ? ' ' + year : ''} at ${hours}:${minutes}`;
+    displayTime = `${month} ${day}${showYear ? ' ' + year : ''} at ${hours}:${minutes}`;
   }
 } else {
   displayTime = 'unknown time';
