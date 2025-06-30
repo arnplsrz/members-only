@@ -1,3 +1,9 @@
+<% if (locals.error) { %>
+<div class="notification is-danger is-light">
+  <button class="delete"></button>
+  <%= error %>
+</div>
+<% } %>
 <section class="section">
   <% if (posts.length > 0) { %>
   <h2 class="title is-4">Recent Posts</h2>

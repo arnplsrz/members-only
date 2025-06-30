@@ -3,18 +3,23 @@
     <div class="container is-maxheight is-flex is-flex-direction-column is-justify-content-center">
       <h2 class="title is-2 has-text-centered"><%= title %></h2>
       <p class="subtitle has-text-centered">Sign in to your account</p>
-      <%- include("../partials/errors") %>
       <form action="/sign-in" method="POST">
         <div class="field">
           <label class="label" for="username">Username</label>
-          <div class="control">
-            <input class="input" type="text" id="username" name="username" placeholder="Enter your username" value="<%= formData.username %>" />
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" required type="text" id="username" name="username" placeholder="Enter your username" value="<%= formData.username %>" />
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
           </div>
         </div>
         <div class="field">
           <label class="label" for="password">Password</label>
-          <div class="control">
-            <input class="input" type="password" id="password" name="password" placeholder="Enter your password" value="<%= formData.password %>" />
+          <div class="control has-icons-left">
+            <input class="input" required type="password" id="password" name="password" placeholder="Enter your password" value="<%= formData.password %>" />
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
           </div>
         </div>
         <div class="field mt-5">
@@ -27,4 +32,5 @@
   </section>
   <section class="cell section banner">
   </section>
+  <%- include("../partials/errors") %>
 </div>

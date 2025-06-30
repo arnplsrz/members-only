@@ -2,14 +2,13 @@ const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const pool = require('../database/pool')
+const queries = require('../database/queries')
 
 const validationRules = [
-  body('firstName').trim().escape().isLength({ min: 1, max: 50 }).withMessage('First name must be at least 1 character long and at most 50 characters long'),
-  body('lastName').trim().escape().isLength({ min: 1, max: 50 }).withMessage('Last name must be at least 1 character long and at most 50 characters long'),
-  body('username').trim().escape().isLength({ min: 1, max: 50 }).withMessage('Username must be at least 1 character long and at most 50 characters long'),
-  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
-
-  // Custom validation to check if passwords match
+  body('firstName').trim().escape().isLength({ min: 1, max: 50 }).withMessage('First name must be 1-50 chars'),
+  body('lastName').trim().escape().isLength({ min: 1, max: 50 }).withMessage('Last name must be 1-50 chars'),
+  body('username').trim().escape().isLength({ min: 1, max: 50 }).withMessage('Username must be 1-50 chars'),
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 chars'),
   body('confirmPassword').custom((value, { req }) => {
     if (value !== req.body.password) {
       throw new Error('Passwords do not match')
@@ -18,24 +17,37 @@ const validationRules = [
   }),
 ]
 
-const getSignup = (req, res) => {
-  res.render('index', {
-    title: 'Sign Up',
-    content: 'pages/signup',
-    formData: {
-      firstName: '',
-      lastName: '',
-      username: '',
-      password: '',
-      confirmPassword: '',
-    },
-  })
+const getSignup = async (req, res) => {
+  if (req.user) {
+    const { posts } = await queries.getPosts()
+    res.render('index', {
+      title: 'Home',
+      content: 'pages/homepage',
+      posts: posts,
+      user: req.user,
+      error: 'Already logged in',
+    })
+  } else {
+    res.render('index', {
+      title: 'Sign Up',
+      content: 'pages/signup',
+      user: req.user,
+      formData: {
+        firstName: '',
+        lastName: '',
+        username: '',
+        password: '',
+        confirmPassword: '',
+      },
+    })
+  }
 }
 
 const postSignup = [
   validationRules,
   async (req, res, next) => {
     const errors = validationResult(req)
+    console.log(errors)
 
     if (!errors.isEmpty()) {
       for (const error of errors.array()) {
@@ -78,15 +90,30 @@ const postSignup = [
   },
 ]
 
-const getSignin = (req, res) => {
-  res.render('index', {
-    title: 'Sign In',
-    content: 'pages/signin',
-    formData: {
-      username: '',
-      password: '',
-    },
-  })
+const getSignin = async (req, res) => {
+  if (req.user) {
+    const { posts } = await queries.getPosts()
+    res.render('index', {
+      title: 'Home',
+      content: 'pages/homepage',
+      posts: posts,
+      user: req.user,
+      error: 'Already logged in',
+    })
+  } else {
+    res.render('index', {
+      title: 'Sign In',
+      content: 'pages/signin',
+      user: req.user,
+      formData: {
+        firstName: '',
+        lastName: '',
+        username: '',
+        password: '',
+        confirmPassword: '',
+      },
+    })
+  }
 }
 
 const postSignin = async (req, res, next) => {
@@ -102,7 +129,7 @@ const postSignin = async (req, res, next) => {
         errors: [{ msg: info.message }],
         formData: {
           username: req.body.username,
-          password: req.body.password,
+          password: '',
         },
       })
     }

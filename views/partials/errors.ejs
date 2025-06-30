@@ -1,7 +1,12 @@
 <% if (locals.errors) {%>
-<ul>
+<div class="notification is-danger is-light">
+  <button class="delete"></button>
   <% errors.forEach(function(error) { %>
-  <li><%= error.msg %></li>
+  <% if (error.msg === 'Incorrect username') { %>
+  Invalid username or password.
+  <% } else { %>
+  <%= error.msg %>
+  <% } %>
   <% }); %>
-</ul>
+</div>
 <% } %>
