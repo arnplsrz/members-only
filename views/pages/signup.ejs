@@ -1,47 +1,164 @@
   <div class="grid is-maxheight sign-form">
     <section class="cell section banner">
     </section>
+
     <section class="cell section">
       <div class="container is-flex is-flex-direction-column is-justify-content-center">
         <h2 class="title is-2 has-text-centered"><%= title %></h2>
         <p class="subtitle has-text-centered">Sign up to your account</p>
-        <%- include("../partials/errors") %>
         <form action="/sign-up" method="POST">
+
           <div class="field">
             <label class="label" for="firstName">First Name</label>
-            <div class="control">
-              <input class="input" id="firstName" name="firstName" placeholder="First Name" type="text" value="<%= formData.firstName %>" />
+            <% if (locals.errors && errors.some(error => error.path === 'firstName')) { %>
+            <div class="control has-icons-left has-icons-right">
+              <div class="control has-icons-left has-icons-right">
+                <input class="input is-danger" id="firstName" name="firstName" placeholder="First Name" type="text" value="<%= formData.firstName %>" />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+                <span class="icon is-small is-right">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </span>
+              </div>
+              <% const firstNameError = errors.find(error => error.path === 'firstName'); %>
+              <% if (firstNameError) { %>
+              <p class="help is-danger"><%= firstNameError.msg %></p>
+              <% } %>
             </div>
+            <% } else { %>
+            <div class="control has-icons-left">
+              <input class="input" id="firstName" name="firstName" placeholder="First Name" type="text" value="<%= formData.firstName %>" />
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+            </div>
+            <% } %>
           </div>
+
           <div class="field">
             <label class="label" for="lastName">Last Name</label>
-            <div class="control">
-              <input class="input" id="lastName" name="lastName" placeholder="Last Name" type="text" value="<%= formData.lastName %>" />
+            <% if (locals.errors && errors.some(error => error.path === 'lastName')) { %>
+            <div class="control has-icons-left has-icons-right">
+              <div class="control has-icons-left has-icons-right">
+                <input class="input is-danger" id="lastName" name="lastName" placeholder="Last Name" type="text" value="<%= formData.lastName %>" />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user-tag"></i>
+                </span>
+                <span class="icon is-small is-right">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </span>
+              </div>
+              <% const lastNameError = errors.find(error => error.path === 'lastName'); %>
+              <% if (lastNameError) { %>
+              <p class="help is-danger"><%= lastNameError.msg %></p>
+              <% } %>
+
             </div>
+            <% } else { %>
+            <div class="control has-icons-left">
+              <input class="input" id="lastName" name="lastName" placeholder="Last Name" type="text" value="<%= formData.lastName %>" />
+              <span class="icon is-small is-left">
+                <i class="fas fa-user-tag"></i>
+              </span>
+            </div>
+            <% } %>
           </div>
+
           <div class="field">
             <label class="label" for="username">Username</label>
-            <div class="control">
-              <input class="input" id="username" name="username" placeholder="Username" type="text" value="<%= formData.username %>" />
+            <% if (locals.errors && errors.some(error => error.path === 'username')) { %>
+            <div class="control has-icons-left has-icons-right">
+              <div class="control has-icons-left has-icons-right">
+                <input class="input is-danger" id="username" name="username" placeholder="Username" type="text" value="<%= formData.username %>" />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user-circle"></i>
+                </span>
+                <span class="icon is-small is-right">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </span>
+              </div>
+              <% const usernameError = errors.find(error => error.path === 'username'); %>
+              <% if (usernameError) { %>
+              <p class="help is-danger"><%= usernameError.msg %></p>
+              <% } %>
+
             </div>
+            <% } else { %>
+            <div class="control has-icons-left">
+              <input class="input" id="username" name="username" placeholder="Username" type="text" value="<%= formData.username %>" />
+              <span class="icon is-small is-left">
+                <i class="fas fa-user-circle"></i>
+              </span>
+            </div>
+            <% } %>
           </div>
+
           <div class="field">
             <label class="label" for="password">Password</label>
-            <div class="control">
-              <input class="input" id="password" name="password" placeholder="Password" type="password" value="<%= formData.password %>" />
+            <% if (locals.errors && errors.some(error => error.path === 'password')) { %>
+            <div class="control has-icons-left has-icons-right">
+              <div class="control has-icons-left has-icons-right">
+                <input class="input is-danger" id="password" name="password" placeholder="Password" type="password" value="<%= formData.password %>" />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+                <span class="icon is-small is-right">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </span>
+              </div>
+              <% const passwordError = errors.find(error => error.path === 'password'); %>
+              <% if (passwordError) { %>
+              <p class="help is-danger"><%= passwordError.msg %></p>
+              <% } %>
+
             </div>
+            <% } else { %>
+            <div class="control has-icons-left">
+              <input class="input" id="password" name="password" placeholder="Password" type="password" value="<%= formData.password %>" />
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </div>
+            <% } %>
           </div>
+
           <div class="field">
             <label class="label" for="confirmPassword">Confirm Password</label>
-            <div class="control">
-              <input class="input" type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" value="<%= formData.confirmPassword %>" />
+            <% if (locals.errors && errors.some(error => error.path === 'confirmPassword')) { %>
+            <div class="control has-icons-left has-icons-right">
+              <div class="control has-icons-left has-icons-right">
+                <input class="input is-danger" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" type="password" value="<%= formData.confirmPassword %>" />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+                <span class="icon is-small is-right">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </span>
+              </div>
+              <% const confirmPasswordError = errors.find(error => error.path === 'confirmPassword'); %>
+              <% if (confirmPasswordError) { %>
+              <p class="help is-danger"><%= confirmPasswordError.msg %></p>
+              <% } %>
+
             </div>
+            <% } else { %>
+            <div class="control has-icons-left">
+              <input class="input" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" type="password" value="<%= formData.confirmPassword %>" />
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </div>
+            <% } %>
           </div>
+
+
           <div class="field mt-5">
             <div class="control">
               <button class="button is-primary is-fullwidth" type="submit">Sign Up</button>
             </div>
           </div>
+
           <p class="has-text-centered">Already have an account? <a href="/sign-in">Sign In</a></p>
         </form>
       </div>
