@@ -81,7 +81,19 @@ const postSignup = [
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10)
       await pool.query('insert into users (first_name, last_name, username, password) values ($1, $2, $3, $4)', [req.body.firstName, req.body.lastName, req.body.username, hashedPassword])
-      res.redirect('/')
+      res.status(200).render('index', {
+        title: 'Sign Up',
+        content: 'pages/signup',
+        info: 'Account Created!',
+        user: req.user,
+        formData: {
+          firstName: '',
+          lastName: '',
+          username: '',
+          password: '',
+          confirmPassword: '',
+        },
+      })
     } catch (error) {
       console.error(error)
       next(error)
