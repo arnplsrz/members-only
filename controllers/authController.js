@@ -47,7 +47,6 @@ const postSignup = [
   validationRules,
   async (req, res, next) => {
     const errors = validationResult(req)
-    console.log(errors)
 
     if (!errors.isEmpty()) {
       for (const error of errors.array()) {
