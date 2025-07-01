@@ -2,15 +2,7 @@ const pool = require('../database/pool')
 
 const getMembership = (req, res) => {
   if (!req.user) {
-    return res.status(403).render('index', {
-      title: 'Sign in',
-      content: 'pages/signin',
-      formData: {
-        username: '',
-        password: '',
-      },
-      errors: [{ msg: 'You must be signed in to access that page' }],
-    })
+    return res.redirect('/sign-in')
   }
 
   res.render('index', {

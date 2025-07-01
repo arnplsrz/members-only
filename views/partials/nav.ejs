@@ -14,12 +14,14 @@
   <div id="navbarMenu" class="navbar-menu">
     <div class="navbar-start">
       <% if (locals.user) { %>
+      <% if (locals.user.membership_status || locals.user.is_admin) { %>
       <a class="navbar-item" href="/new-message">
         <span class="icon">
           <i class="fas fa-envelope"></i>
         </span>
         <span>New Message</span>
       </a>
+      <% } %>
       <a class="navbar-item" href="/membership">
         <span class="icon">
           <i class="fas fa-user-plus"></i>

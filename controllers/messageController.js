@@ -1,7 +1,7 @@
 const pool = require('../database/pool')
 
 const getNewMessage = (req, res) => {
-  if (!req.user) {
+  if (!req.user || (!req.user.membership_status && !req.user.is_admin)) {
     return res.redirect('/sign-in')
   }
 
