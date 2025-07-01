@@ -1,22 +1,22 @@
--- Insert 10 random posts with random user_id from users table
-INSERT INTO posts (user_id, title, content)
+INSERT INTO posts (user_id, title, content, timestamp)
 SELECT 
   u.id,
   t.title,
-  t.content
+  t.content,
+  NOW() - (INTERVAL '1 day' * FLOOR(RANDOM() * 7))
 FROM 
   (SELECT id FROM users ORDER BY RANDOM() LIMIT 10) u,
   (VALUES
-    ('A Day in the Park', 'Enjoyed a sunny afternoon at the park with friends and family. Great weather and lots of fun!'),
-    ('Learning SQL', 'Started learning SQL today. It is both challenging and rewarding!'),
-    ('Coffee Break', 'Had the best cup of coffee this morning. Feeling energized for the day ahead!'),
-    ('Book Recommendation', 'Just finished reading an amazing book. Highly recommend it to everyone!'),
-    ('Workout Complete', 'Completed my workout session. Feeling strong and accomplished!'),
-    ('Movie Night', 'Watched a great movie last night. The plot twist was unexpected!'),
-    ('Cooking Adventure', 'Tried a new recipe today. It turned out delicious!'),
-    ('Tech News', 'Excited about the latest tech updates announced this week.'),
-    ('Weekend Plans', 'Looking forward to a relaxing weekend with family.'),
-    ('Motivation', 'Stay positive and keep moving forward!')
+    ('Lorem Ipsum 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae justo nec urna cursus.'),
+    ('Lorem Ipsum 2', 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'),
+    ('Lorem Ipsum 3', 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'),
+    ('Lorem Ipsum 4', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'),
+    ('Lorem Ipsum 5', 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.'),
+    ('Lorem Ipsum 6', 'Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et.'),
+    ('Lorem Ipsum 7', 'Suspendisse potenti. Pellentesque habitant morbi tristique senectus et netus et malesuada.'),
+    ('Lorem Ipsum 8', 'Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.'),
+    ('Lorem Ipsum 9', 'Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.'),
+    ('Lorem Ipsum 10', 'Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.')
   ) AS t(title, content)
 ORDER BY RANDOM()
 LIMIT 10;
