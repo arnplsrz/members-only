@@ -50,8 +50,25 @@ main {
 }
 
 .grid.sign-form .container {
-  max-width: 70%;
+  max-width: 70% !important;
   height: 100%;
+}
+
+main {
+  position: relative;
+}
+
+.notification {
+  width: auto;
+  padding-right: 3rem;
+  z-index: 99;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+.message-header {
+  background-color: light-dark(#eaeaea, #2e333d);
 }
 
 .banner {
@@ -83,6 +100,6 @@ main {
   }
 
   .grid.sign-form .container {
-    max-width: 100%;
+    max-width: 100% !important;
   }
 }
