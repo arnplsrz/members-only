@@ -4,14 +4,14 @@
   <%= error %>
 </div>
 <% } %>
-<section class="section">
-  <% if (posts.length > 0) { %>
-  <h2 class="title is-4">Recent Posts</h2>
-  <div class="grid posts">
-    <% posts.forEach(post => { %>
-    <div class="card cell is-flex is-flex-direction-column">
-      <div class="card-content is-flex-grow-1">
-        <div class="media mb-3">
+<div class="container is-maxheight">
+  <section class="section is-maxheight is-flex is-flex-direction-column is-justify-content-center">
+    <% if (posts.length > 0) { %>
+    <h2 class="title is-4">Recent Posts</h2>
+    <div class="grid posts is-gap-4">
+      <% posts.forEach(post => { %>
+      <article class="message is-flex is-flex-direction-column mb-0">
+        <div class="message-header">
           <div class="media-content">
             <% if (locals.user) { %>
             <p class="title is-4 p-1"><%= post.user.first_name %> <%= post.user.last_name %></p>
@@ -24,30 +24,22 @@
             </p>
             <% } %>
           </div>
+
+          <% if (locals.user && locals.user.is_admin) { %>
+          <form action="/posts/<%= post.id %>/delete" method="POST">
+            <button class="delete" aria-label="delete" type="submit"></button>
+          </form>
+          <% } %>
+
         </div>
-        <div class="content">
+        <div class="message-body is-flex-grow-1">
           <%= post.content.length > 350 ? post.content.substring(0, 350) + '...' : post.content %>
         </div>
-      </div>
-      <% if (locals.user && locals.user.is_admin) { %>
-      <footer class="card-footer">
-        <form action="/posts/<%= post.id %>/delete" method="POST" class="card-footer-item p-5 is-justify-content-start">
-          <button class="button is-small is-danger" type="submit">Delete</button>
-        </form>
-      </footer>
-      <% } %>
+      </article>
+      <% }) %>
     </div>
-    <% }) %>
-  </div>
-  <% } else { %>
-  <p>No posts available.</p>
-  <% } %>
-</section>
-
-<section class="section">
-  <h1 class="title">Section</h1>
-  <h2 class="subtitle">
-    A simple container to divide your page into <strong>sections</strong>, like
-    the one you're currently reading.
-  </h2>
-</section>
+    <% } else { %>
+    <h2 class="title is-2 has-text-centered mb-4">No posts available. (┬┬﹏┬┬)</h2>
+    <% } %>
+  </section>
+</div>
