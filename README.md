@@ -14,7 +14,7 @@ A Node.js application using Express, Passport.js, PostgreSQL, and Bulma.
 ## Resources
 
 - [Font Awesome](https://fontawesome.com/) for _Awesome_ Icons!
-- [Hero Patterns](https://heropatterns.com/) for cool looking patterns
+- [Hero Patterns](https://heropatterns.com/) for cool-looking patterns
 - This project will not look so good thanks to [Bulma](https://bulma.io/)!
-- Uses Chivo typeface which you look at [Google Fonts](https://fonts.google.com/specimen/Chivo)
-- And to folks from [TheOdinProject](https://www.theodinproject.com/) for learning this stuff!
+- Uses the Chivo typeface, which you can look at on [Google Fonts](https://fonts.google.com/specimen/Chivo).
+- And to folks from [The Odin Project](https://www.theodinproject.com/) for learning this stuff!
