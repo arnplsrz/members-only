@@ -4,6 +4,11 @@ A Node.js application using Express, Passport.js, PostgreSQL, and Bulma.
 
 ![Screenshot](https://github.com/arnplsrz/members-only/blob/main/.github/image.png 'Homepage Screenshot')
 
+## Tech Stack
+
+- Database: PostgreSQL via [Neon](https://neon.com/)
+- Deployment: [Render](https://render.com/)
+
 ## Features
 
 - User authentication with [Passport.js](https://www.passportjs.org/)
